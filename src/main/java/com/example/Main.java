@@ -25,5 +25,13 @@ public class Main {
         System.out.println("Text xifrat:     " + cipherText);
         System.out.println("Text desxifrat:  " + decrypted);
         System.out.println("Coincideixen:    " + text.equals(decrypted));
+
+        RSASignatureService signer = new RSASignatureService();
+        String document = "Document important signat per l'emissor";
+        BigInteger signature = signer.sign(document, privateKey);
+
+        System.out.println("Signatura:                 " + signature);
+        System.out.println("Verificació (original):    " + signer.verify(document, signature, publicKey));
+        System.out.println("Verificació (modificat):   " + signer.verify(document + ".", signature, publicKey));
     }
 }
